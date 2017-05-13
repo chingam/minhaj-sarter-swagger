@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ public class UserController {
 	
 	
 	@ApiOperation(tags="User registration", value="Get user registration", notes="Get user registration for api")
-	@RequestMapping(value="/user", method = RequestMethod.POST)
+	@RequestMapping(value="/user", method = RequestMethod.POST, produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public HashMap<String, Object> createUser(@ApiParam(value="User Model", required=true) @RequestBody User user){
 		service.addUser(user);
 		HashMap<String, Object> res = new HashMap<String, Object>();
@@ -34,7 +35,7 @@ public class UserController {
 	}
 	
 	@ApiOperation(tags="Update user", value="User info", notes="Put user info for api")
-	@RequestMapping(value="/user/{id}/{name}/{email}", method = RequestMethod.PUT)
+	@RequestMapping(value="/user/{id}/{name}/{email}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public HashMap<String, String> UpdateUser(@ApiParam(value="User id", required=true) @PathVariable String id, 
 			@ApiParam(value="User name", required=true) @PathVariable String name, @ApiParam(value="User email", required=true) @PathVariable String email){
 		HashMap<String, String> res = new HashMap<String, String>();
@@ -54,13 +55,13 @@ public class UserController {
 	
 	
 	@ApiOperation(tags="Users All", value="Get user info", notes="Get user info for api")
-	@RequestMapping(value="/user", method = RequestMethod.GET)
+	@RequestMapping(value="/user", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getUserAll(){
 		return service.fetchAll();
 	}
 	
 	@ApiOperation(tags="Delete user", value="User info", notes="Put user info for api")
-	@RequestMapping(value="/user/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value="/user/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public HashMap<String, String> deleteUser(@ApiParam(value="User id", required=true) @PathVariable String id){
 		User user = new User();
 		user.setId(id);

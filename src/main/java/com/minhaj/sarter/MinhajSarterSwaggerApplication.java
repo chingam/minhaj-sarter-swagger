@@ -16,7 +16,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@ComponentScan({ "com.minhaj.sarter.controller", "com.minhaj.sarter.entity", "com.minhaj.sarter.service" })
+@ComponentScan({ "com.minhaj.sarter.controller", "com.minhaj.sarter.entity", "com.minhaj.sarter.service", "com.minhaj.sarter.config"})
 @EnableSwagger2
 @SpringBootApplication
 public class MinhajSarterSwaggerApplication {
@@ -28,7 +28,7 @@ public class MinhajSarterSwaggerApplication {
 	@Bean
 	public Docket empowerHubApi() {
 		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.regex("/user.*")).build().pathMapping("/")
+				.paths(PathSelectors.regex("/user.*|/api.*")).build().pathMapping("/")
 				.directModelSubstitute(Calendar.class, String.class);
 	}
 
