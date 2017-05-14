@@ -5,10 +5,22 @@
 	git clone https://github.com/chingam/minhaj-sarter-swagger.git
 	cd minhaj-sarter-swagger
 	mvn -DskipTests spring-boot:run
-	API KEY : ff808181569d2a7401569d2f12930001
 ```
-Just put api key in to user name field and password not need
+
 You can then access here: http://localhost:8080/swagger-ui.html
+
+## How to use API key
+1. Add API key to <b>api_key</b> database table or using <b>ApiKey</b> JPA entity.
+2. Add header <b>ApiKey</b> or use HTTP basic authentication with <b>username = {API key}</b> and <b>password = EMPTY</b> to access REST resource.
+
+	```ApiKey : ff808181569d2a7401569d2f12930001```</br>
+
+	```curl -H "ApiKey: YOUR_API_KEY" https://yourhost/yourpath```</br>or</br>
+
+	```curl -u YOUR_API_KEY: https://yourhost/yourpath```
+
+## How to control access to URL patterns
+1. Add pattern and authorities to <b>api_pattern</b> database table or using <b>ApiPattern</b> JPA entity.
 
 
 
